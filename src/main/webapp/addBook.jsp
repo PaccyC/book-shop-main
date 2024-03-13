@@ -29,7 +29,7 @@
     <div class="form-row">
         <div class="col-md-6 mb-3">
             <label for="yearOfPublication">Year Of Publication</label>
-            <input type="text" class="form-control" id="yearOfPublication" name="year_of_publication" placeholder="Year Of Publication" >
+            <input type="number" class="form-control" id="yearOfPublication" name="year_of_publication" placeholder="Year Of Publication" >
         </div>
         <div class="col-md-3 mb-3">
             <label for="category">Category</label>

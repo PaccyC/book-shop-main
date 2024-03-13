@@ -29,10 +29,10 @@ public class AddingBooksServlet extends HttpServlet {
         Connection connection =null;
 
 
-        int id= Integer.parseInt(req.getParameter("id"));
+//        int id= Integer.parseInt(req.getParameter("id"));
         String name= req.getParameter("name");
         String author= req.getParameter("author");
-        String year_of_publication= req.getParameter("year_of_publication");
+        int year_of_publication= Integer.parseInt(req.getParameter("year_of_publication"));
         String category= req.getParameter("category");
 
         try {
@@ -40,7 +40,7 @@ public class AddingBooksServlet extends HttpServlet {
       connection= DriverManager.getConnection(DATABASE_URL,USERNAME,PASSWORD);
 
             BookDAO bookDAO= new BookDAO(connection);
-            bookDAO.addNewBook(new Book(id, name,author,year_of_publication,category));
+            bookDAO.addNewBook(new Book(name,author,year_of_publication,category));
         } catch (Exception e) {
           e.printStackTrace();
         }

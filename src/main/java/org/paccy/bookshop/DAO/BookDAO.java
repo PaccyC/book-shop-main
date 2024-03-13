@@ -28,7 +28,7 @@ public class BookDAO {
                 int id=resultSet.getInt("id");
                 String name= resultSet.getString("name");
                 String author=resultSet.getString("author");
-                String year_of_publication=resultSet.getString("year_of_publication");
+                int year_of_publication= Integer.parseInt(resultSet.getString("year_of_publication"));
                 String category= resultSet.getString("category");
 
                 bookList.add(new Book(id,name,author,year_of_publication,category));
@@ -47,7 +47,7 @@ public class BookDAO {
         try(PreparedStatement ps= connection.prepareStatement(query)){
          ps.setString( 1,book.getName());
           ps.setString(2, book.getAuthor());
-          ps.setString(3, book.getYear_of_publication());
+          ps.setInt(3, book.getYear_of_publication());
           ps.setString(4, book.getCategory());
 
           ps.executeUpdate();

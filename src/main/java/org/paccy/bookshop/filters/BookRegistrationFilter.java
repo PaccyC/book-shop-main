@@ -19,12 +19,13 @@ public class BookRegistrationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ServletRequest httpRequest=(HttpServletRequest) servletRequest;
+
         String year_of_publication_param=httpRequest.getParameter("year_of_publication");
         PrintWriter out=servletResponse.getWriter();
 
         if(year_of_publication_param != null){
         int year_of_publication=Integer.parseInt(year_of_publication_param);
-        if(year_of_publication >1000){
+        if(year_of_publication > 1000){
             filterChain.doFilter(servletRequest,servletResponse);
         }
         else {

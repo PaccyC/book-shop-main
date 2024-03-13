@@ -47,7 +47,7 @@ public class UserLogin extends HttpServlet {
 
                 session.setAttribute("email",rs.getString("email"));
 
-                dispatcher=request.getRequestDispatcher("index.jsp");
+                dispatcher=request.getRequestDispatcher("bookList.jsp");
             }
             else {
                 out.println("<h4>Sorry, username or password is incorrect! </h4>");
@@ -66,6 +66,7 @@ public class UserLogin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher=req.getRequestDispatcher("login.jsp");
 
         requestDispatcher.forward(req,resp);

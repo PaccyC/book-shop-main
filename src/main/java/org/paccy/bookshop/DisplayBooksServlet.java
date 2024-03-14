@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.paccy.bookshop.DAO.BookDAO;
 import org.paccy.bookshop.DAO.UserDAO;
 import org.paccy.bookshop.models.Book;
@@ -26,6 +27,14 @@ public class DisplayBooksServlet  extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+        String email = (String) session.getAttribute("email");
+        if (email == null) {
+            // User is not authenticated, redirect to login page
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();

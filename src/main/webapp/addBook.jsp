@@ -13,6 +13,12 @@
 </head>
 <body>
 
+<!-- Display error message if it exists -->
+<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+<% if (errorMessage != null && !errorMessage.isEmpty()) { %>
+<div style="color: red;"><%= errorMessage %></div>
+<% } %>
+
 <form action="add-book" method="post">
     <div class="form-row">
         <div class="col-md-4 mb-3">

@@ -14,6 +14,14 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        if (email == null) {
+            // User is not authenticated, redirect to login page
+            response.sendRedirect("login.jsp");
+            return;
+        }
         response.setContentType("text/html");
 
         // Hello

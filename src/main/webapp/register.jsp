@@ -48,7 +48,7 @@
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <p>Already have an account <a href="/login-servlet">LOGIN</a></p>
+    <p>Already have an account <a href="login">LOGIN</a></p>
 </form>
 </body>
 </html>

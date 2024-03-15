@@ -20,14 +20,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/allBooks")
-public class DisplayBooksServlet  extends HttpServlet {
-    private String DATABASE_URL="jdbc:mysql://localhost:3306/book_shop";
-    private String USERNAME="root";
-    private String PASSWORD="";
+public class DisplayBooksServlet extends HttpServlet {
+    private String DATABASE_URL = "jdbc:mysql://localhost:3306/book_shop";
+    private String USERNAME = "root";
+    private String PASSWORD = "";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = req.getSession();
         String email = (String) session.getAttribute("email");
         if (email == null) {
@@ -36,28 +35,28 @@ public class DisplayBooksServlet  extends HttpServlet {
             return;
         }
 
-        response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
-        Connection connection=null;
-
+        Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            connection= DriverManager.getConnection(DATABASE_URL,USERNAME,PASSWORD);
-            BookDAO bookDAO= new BookDAO(connection);
+            connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+            BookDAO bookDAO = new BookDAO(connection);
             List<Book> books = bookDAO.getBookLIst();
             req.setAttribute("books", books);
-
-
-        } catch (SQLException e){
-            throw new RuntimeException(e);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new ServletException(e); // Handle exceptions by throwing ServletException
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close(); // Close connection in finally block to ensure resources are released
+                }
+            } catch (SQLException e) {
+                // Log or handle the exception appropriately
+                e.printStackTrace();
+            }
         }
 
-
-        RequestDispatcher requestDispatcher=req.getRequestDispatcher("bookList.jsp");
-        requestDispatcher.forward(req,response);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("bookList.jsp");
+        requestDispatcher.forward(req, response);
     }
+
 }

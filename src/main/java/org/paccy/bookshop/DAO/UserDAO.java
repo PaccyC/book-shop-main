@@ -57,21 +57,21 @@ public class UserDAO {
         return users;
     }
 
-    public User getUserById(String userId) throws SQLException {
-        String query = "SELECT * FROM users WHERE id = ?";
+    public User getUserByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM users WHERE email = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, userId);
+            statement.setString(1, email);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String firstName= resultSet.getString("firstName");
                     String lastName=resultSet.getString("lastName");
-                    String email=resultSet.getString("email");
+                     email=resultSet.getString("email");
                     String password= resultSet.getString("password");
                     int age=resultSet.getInt("age");
                     String institution=resultSet.getString("institution");
                     return new User(firstName,lastName, email,password, age, institution);
                 } else {
-                    // Customer not found
+
                     return null;
                 }
             }

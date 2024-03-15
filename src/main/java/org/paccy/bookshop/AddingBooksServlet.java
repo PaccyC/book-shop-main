@@ -41,6 +41,7 @@ public class AddingBooksServlet extends HttpServlet {
 
             BookDAO bookDAO= new BookDAO(connection);
             bookDAO.addNewBook(new Book(name,author,year_of_publication,category));
+            resp.sendRedirect(req.getContextPath()+ "/allBooks");
         } catch (Exception e) {
           e.printStackTrace();
         }

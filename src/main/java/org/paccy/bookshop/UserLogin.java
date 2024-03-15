@@ -47,14 +47,15 @@ public class UserLogin extends HttpServlet {
 
                 session.setAttribute("email",rs.getString("email"));
 
-                dispatcher=request.getRequestDispatcher("bookList.jsp");
+                 response.sendRedirect("allBooks");
             }
             else {
-                out.println("<h4>Sorry, username or password is incorrect! </h4>");
+                out.println("<h4>Sorry, email or password is incorrect! </h4>");
                 request.setAttribute("status","failed");
-                request.getRequestDispatcher("login.jsp");
+//                request.getRequestDispatcher("login.jsp");
+                response.sendRedirect("/login");
             }
-            dispatcher.forward(request,response);
+//            dispatcher.forward(request,response);
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
